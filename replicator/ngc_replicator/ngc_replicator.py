@@ -112,6 +112,8 @@ class Replicator:
             log.info("Pulling {}:{}".format(image.name, image.tag))
             self.clone_image(image.name, image.tag, image.docker_id)  # independent
             self.state[image.name][image.tag] = image.docker_id  # dep [clone]
+            log.info("Saving state {}:{}".format(image.name, image.tag))
+            self.save_state()  # Added to save state each time new image is cloned in
             yield image
         self.save_state()
 
