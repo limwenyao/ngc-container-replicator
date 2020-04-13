@@ -224,7 +224,8 @@ class Replicator:
             log.debug("filtering on images name, only allow {}".format(self.images))
             found = False
             for image in self.images:
-                if image in name:
+                image = "{}/{}".format(self.project, image)
+                if image == name:  # Using exact tag filtering instead of 'in'
                     log.debug("{} passes filter; matches {}".format(name, image))
                     found = True
             if not found:
